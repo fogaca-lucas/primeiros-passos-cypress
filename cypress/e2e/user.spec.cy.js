@@ -1,14 +1,15 @@
 import userData from '../fixtures/user-Data.json'
+import LoginPage from '../pages/loginPage.js'
+import DashboardPage from '../pages/dashboardPage.js'
+
+const loginPage = new LoginPage()
+const dashboardPage = new DashboardPage()
 
 describe('Orange HRM Tests', () => {
 
   const selectorList = {
-    usernameField: "[name= 'username']",
-    passwordField: "[name='password']",
-    loginButton: "[type='submit']",
     sectionTitleTopBar: ".oxd-topbar-header-breadcrumb-module",
-    dashboardGrid: ".orangehrm-dashboard-widget-name",
-    wrongCredentialAlert: "[role= 'alert']",
+    
     myInfoButton: '[href="/web/index.php/pim/viewMyDetails"]',
     firstNameField: "[name='firstName']",
     middleNameField: "[name='middleName']",
@@ -16,18 +17,20 @@ describe('Orange HRM Tests', () => {
     genericField: ".oxd-input--active",
     dateField: "[placeholder='yyyy-dd-mm']",
     dateCloseButton: ".--close" ,
-    submitButton: "[type='submit']"
+    submitButton: "[type='submit']",
+    genericComboBox: ".oxd-select-text--arrow",
+    secondItenComboBox: ":nth-child(6) > span",
+    thirdItenComboBox: ".oxd-select-dropdown > :nth-child(2)"
+
 
   }
 
   it.only('User Info Update - Success', () => {
+    loginPage.acessLoginPage()
+    loginPage.loginWithUser(userData.userSucess.username, userData.userSucess.password) 
 
-    cy.visit('/auth/login')
-    cy.get(selectorList.usernameField).type(userData.userSucess.username)
-    cy.get(selectorList.passwordField).type(userData.userSucess.password)
-    cy.get(selectorList.loginButton).click()
-    cy.location('pathname').should('equal', '/web/index.php/dashboard/index')
-    cy.get(selectorList.dashboardGrid)
+    dashboardPage.checkDashboardPage()
+    
     cy.get(selectorList.myInfoButton).click()
     cy.get(selectorList.firstNameField).clear().type('FirstName')
     cy.get(selectorList.middleNameField).clear().type('MiddleName')
@@ -38,17 +41,22 @@ describe('Orange HRM Tests', () => {
     cy.get(selectorList.dateField).eq(0).clear().type('2032-11-02')
     cy.get(selectorList.dateCloseButton).click()
     cy.get(selectorList.dateField).eq(1).clear().type('1998-05-01')
+    cy.get(selectorList.genericComboBox).eq(0).click()
+    cy.get(selectorList.secondItenComboBox).click()
+    cy.get(selectorList.genericComboBox).eq(1).click()
+    cy.get(selectorList.thirdItenComboBox).click()
     cy.get(selectorList.submitButton).eq(0).click()
     cy.get('body').should('contain', 'Successfully Updated')
     cy.get('.oxd-toast-close')
+
     
     
   })
   it('Login - Fail', () => {
     cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
-    cy.get(selectorList.usernameField).type(userData.userFail.username)
-    cy.get(selectorList.passwordField).type(userData.userFail.password)
-    cy.get(selectorList.loginButton).click()
-    cy.get(selectorList.wrongCredentialAlert)
+    cy.get(loginPage.selectorList().usernameField).type(userData.userFail.username)
+    cy.get(loginPage.selectorList().passwordField).type(userData.userFail.password)
+    cy.get(loginPage.selectorList().loginButton).click()
+    cy.get(loginPage.selectorList().wrongCredentialAlert)
   })
 })

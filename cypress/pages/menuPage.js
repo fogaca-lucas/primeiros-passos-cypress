@@ -9,11 +9,11 @@ class MenuPage {
             return selectors
         }
 
-        accessMyInfo() { 
+        accessMyInfo() { ;
             cy.get(this.selectorsList().myInfoButton).click()    
+        }
 
-
-        accessPerformance() ;
+        accessPerformance() { ;
             cy.get(this.selectorsList().performanceButton).click()
         }
     }

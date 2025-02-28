@@ -78,4 +78,4 @@ Esta classe cuida da interação com o menu, com métodos para acessar diferente
 
 ### myInfoPage.js
 
-Esta classe cuida da interação com a página de informações pessoais, com métodos para preencher e salvar detalhes pessoais e de funcionário.
+Esta classe cuida da interação com a página de informações pessoais, com métodos para preencher e salvar detalhes pessoais e de funcionário...

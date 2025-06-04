@@ -1,4 +1,4 @@
-```markdown
+
 # Primeiros Passos com Cypress
 
 Bem-vindo ao projeto "Primeiros Passos com Cypress"! Este é um guia inicial para quem quer aprender a usar o Cypress, uma ferramenta muito útil para testar aplicações web de ponta a ponta.
@@ -31,19 +31,19 @@ Antes de começar, você vai precisar ter o seguinte instalado:
 
    ```bash
    git clone https://github.com/seu-usuario/primeiros-passos-cypress.git
-   ```
+   
 
 2. Vá para o diretório do projeto:
 
    ```bash
    cd primeiros-passos-cypress
-   ```
+   
 
 3. Instale as dependências:
 
    ```bash
    npm install
-   ```
+   
 
 ## Como rodar os testes?
 
@@ -51,7 +51,7 @@ Para rodar os testes, use o comando:
 
 ```bash
 npx cypress open
-```
+
 
 Isso vai abrir a interface do Cypress, onde você pode escolher e rodar os testes.
 
